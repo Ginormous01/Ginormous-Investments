@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Staff Login — Ginormous Investments</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="api.js"></script>
+  <script src="notifications.js"></script>
+</head>
+<body>
+  <main class="auth-page">
+    <section class="auth-card">
+      <div class="auth-header">
+        <h1>Staff Login</h1>
+        <p>Only authorized staff may access their dashboard.</p>
+      </div>
+
+      <form id="loginForm" class="auth-form">
+        <label>
+          Email address
+          <input type="email" id="email" placeholder="you@company.com" required autocomplete="email">
+        </label>
+        <label>
+          Password
+          <input type="password" id="password" placeholder="Enter your password" required autocomplete="current-password">
+        </label>
+        <div style="text-align:right; margin-bottom:16px;">
+          <a href="forgot-password.html" style="color:#1a1a2e; font-size:13px; text-decoration:none;">Forgot password?</a>
+        </div>
+        <button type="submit" class="btn-primary" style="width:100%;" id="loginBtn">Sign In</button>
+      </form>
+
+      <div class="auth-note">
+        <p>This login is for staff access only. Admin dashboard access is restricted separately.</p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const storedUser = sessionStorage.getItem('staffDashboardUser');
+    if (storedUser) {
+      const user = JSON.parse(storedUser);
+      if (user.role === 'admin') {
+        window.location.href = 'admin-dashboard.html';
+      } else {
+        window.location.href = 'staff-dashboard.html';
+      }
+    }
+
+    document.getElementById('loginForm').addEventListener('submit', async function(event) {
+      event.preventDefault();
+      const email = document.getElementById('email').value.trim().toLowerCase();
+      const password = document.getElementById('password').value;
+      const loginBtn = document.getElementById('loginBtn');
+
+      try {
+        loginBtn.disabled = true;
+        loginBtn.textContent = 'Signing in...';
+        const result = await login(email, password);
+        
+        if (!result.ok) {
+          loginBtn.disabled = false;
+          loginBtn.textContent = 'Sign In';
+          
+          if (result.data.needsVerification) {
+            showNotification(
+              result.data.error + '<br><span style="cursor:pointer;text-decoration:underline;font-weight:bold;margin-top:4px;display:inline-block;" onclick="resendVerification(\'' + email + '\')">Resend verification email</span>',
+              'error', 8000
+            );
+          } else {
+            showNotification(result.data.error || 'Invalid credentials. Please try again.', 'error');
+          }
+          return;
+        }
+
+        sessionStorage.setItem('staffDashboardUser', JSON.stringify(result.data.user));
+        if (result.data.user.role === 'admin') {
+          window.location.href = 'admin-dashboard.html';
+        } else {
+          window.location.href = 'staff-dashboard.html';
+        }
+      } catch (error) {
+        console.error('Login error:', error);
+        showNotification('Unable to connect to the login service. Please make sure the backend is running on localhost:5000', 'error');
+        loginBtn.disabled = false;
+        loginBtn.textContent = 'Sign In';
+      }
+    });
+
+    async function resendVerification(email) {
+      try {
+        const response = await fetch('http://localhost:5000/api/auth/resend-verification', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email })
+        });
+        const data = await response.json();
+        if (data.success) {
+          showNotification('Verification email resent. Please check your inbox.', 'success');
+        } else {
+          showNotification(data.error || 'Failed to resend verification email.', 'error');
+        }
+      } catch (error) {
+        showNotification('Unable to connect to the server.', 'error');
+      }
+    }
+  </script>
+</body>
+</html>

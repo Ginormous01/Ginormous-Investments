@@ -1,0 +1,1516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard — Ginormous Investments</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="api.js"></script>
+</head>
+  <body class="admin-body sidebar-page">
+    <header class="admin-header-top">
+      <div class="admin-header-right">
+        <span class="admin-user-info" id="adminName">Administrator</span>
+        <button id="adminLogout" class="btn-primary">Logout</button>
+      </div>
+    </header>
+
+    <main class="admin-wrap">
+      <!-- Left Sidebar Navigation -->
+      <aside class="admin-sidebar">
+        <div class="admin-sidebar-header">
+          <h1>Admin Panel</h1>
+        </div>
+        <nav class="admin-nav">
+          <ul>
+            <li><a href="#dashboard" class="nav-link active">Dashboard</a></li>
+            <li><a href="#contentEditor" class="nav-link">Edit Content</a></li>
+            <li><a href="#propertyDashboard" class="nav-link">Properties</a></li>
+            <li><a href="#staffDashboard" class="nav-link">Staff</a></li>
+            <li><a href="#eventsDashboard" class="nav-link">Events</a></li>
+            <li></li>
+          </ul>
+        </nav>
+      </aside>
+
+    <!-- Main Content Area -->
+    <section class="admin-main">
+
+      <!-- Dashboard Tab -->
+      <section id="dashboard" class="admin-tab active">
+        <h2>Overview</h2>
+        <div class="stats-overview">
+          <div class="stat-box">
+            <p>Total Staff</p>
+            <h3 id="statStaff">0</h3>
+          </div>
+          <div class="stat-box">
+            <p>Total Admins</p>
+            <h3 id="statAdmins">0</h3>
+          </div>
+          <div class="stat-box">
+            <p>Total Properties</p>
+            <h3 id="statProperties">0</h3>
+          </div>
+          <div class="stat-box">
+            <p>Total Orders</p>
+            <h3 id="statOrders">0</h3>
+          </div>
+          <div class="stat-box">
+            <p>System Status</p>
+            <h3 style="color: var(--gold);">Active</h3>
+          </div>
+        </div>
+      </section>
+
+      <!-- Content Editor Tab -->
+      <section id="contentEditor" class="admin-tab">
+        <h2>Edit Main Page Content</h2>x
+        
+        <div class="editor-section">
+          <h3>Hero Section</h3>
+          <label>Hero Title</label>
+          <input type="text" id="heroTitle" placeholder="Hero title">
+          
+          <label>Hero Subtitle</label>
+          <textarea id="heroSubtitle" placeholder="Hero subtitle"></textarea>
+          
+          <button onclick="updateHeroContent()" class="btn-primary">Save Hero Changes</button>
+        </div>
+
+        <div class="editor-section">
+          <h3>Hero Call-to-Actions</h3>
+          <label>Primary CTA Text</label>
+          <input type="text" id="heroPrimaryCTA" placeholder="Browse Properties">
+          
+          <label>Primary CTA Link</label>
+          <input type="text" id="heroPrimaryLink" placeholder="#shop-properties">
+          
+          <label>Secondary CTA Text</label>
+          <input type="text" id="heroSecondaryCTA" placeholder="Browse Events">
+          
+          <label>Secondary CTA Link</label>
+          <input type="text" id="heroSecondaryLink" placeholder="#shop-events">
+          
+          <button onclick="updateHeroCTAs()" class="btn-primary">Save Hero CTA Changes</button>
+        </div>
+
+        <div class="editor-section">
+          <h3>About Section</h3>
+          <label>About Title</label>
+          <input type="text" id="aboutTitle" placeholder="About title">
+          
+          <label>About Description</label>
+          <textarea id="aboutDescription" placeholder="About description"></textarea>
+          
+          <button onclick="updateAboutContent()" class="btn-primary">Save About Changes</button>
+        </div>
+
+        <div class="editor-section">
+          <h3>Contact Info</h3>
+          <label>WhatsApp Number</label>
+          <input type="tel" id="whatsappNumber" placeholder="+2349000000000">
+          
+          <label>Email Address</label>
+          <input type="email" id="emailAddress" placeholder="info@ginormousinvestments.com">
+          
+          <button onclick="updateContactInfo()" class="btn-primary">Save Contact Info</button>
+        </div>
+
+        <div class="editor-section">
+          <h3>Contact CTA Section</h3>
+          <label>Contact Heading</label>
+          <input type="text" id="contactHeading" placeholder="Have Questions? Our team is ready to help.">
+          
+          <label>Contact Subtitle</label>
+          <textarea id="contactSubtitle" placeholder="Contact us for more information, site visits, or payment plan details."></textarea>
+          
+          <label>WhatsApp Button Text</label>
+          <input type="text" id="contactWhatsAppLabel" placeholder="Chat on WhatsApp">
+          
+          <label>Email Button Text</label>
+          <input type="text" id="contactEmailLabel" placeholder="Send an Email">
+          
+          <button onclick="updateContactCTA()" class="btn-primary">Save Contact CTA</button>
+          <button onclick="saveAllContent()" class="btn-ghost">Save All Page Content</button>
+        </div>
+      </section>
+
+      <!-- Properties Dashboard Tab -->
+      <section id="propertyDashboard" class="admin-tab">
+        <h2>Property Management Dashboard</h2>
+        
+        <div class="form-section">
+          <h3>Add / Edit Property</h3>
+          <div class="form-grid-2">
+            <input type="text" id="propTitle" placeholder="Property title">
+            <input type="text" id="propTag" placeholder="Tag (e.g., Prime Plot)">
+          </div>
+          <textarea id="propDescription" placeholder="Property description" class="form-grid-full"></textarea>
+          <div class="form-grid-3">
+            <div>
+              <label style="font-size:0.8rem;color:rgba(255,255,255,0.6);">Plot Price (₦)</label>
+              <input type="number" id="propPricePlot" placeholder="e.g. 7500000">
+            </div>
+            <div>
+              <label style="font-size:0.8rem;color:rgba(255,255,255,0.6);">Acre Price (₦)</label>
+              <input type="number" id="propPriceAcre" placeholder="e.g. 18000000">
+            </div>
+            <div>
+              <label style="font-size:0.8rem;color:rgba(255,255,255,0.6);">Hectare Price (₦)</label>
+              <input type="number" id="propPriceHectare" placeholder="e.g. 45000000">
+            </div>
+          </div>
+          <input type="text" id="propMeta" placeholder="Meta (e.g., From ₦7.5M · Flexible payment plans)" class="form-grid-full">
+          <div class="form-grid-2">
+            <div>
+              <label style="font-size:0.8rem;color:rgba(255,255,255,0.6);">Property Image</label>
+              <input type="file" id="propImageFile" accept="image/*" class="form-grid-full">
+              <div id="propImagePreview" style="margin-top:0.5rem;display:none;">
+                <img id="propImagePreviewImg" style="max-width:120px;border-radius:4px;border:1px solid rgba(251,188,31,0.3);">
+                <input type="hidden" id="propImage">
+              </div>
+            </div>
+            <div>
+              <label style="font-size:0.8rem;color:rgba(255,255,255,0.6);">Status</label>
+              <select id="propStatus" class="form-grid-full">
+                <option value="available">Available</option>
+                <option value="sold">Sold</option>
+                <option value="reserved">Reserved</option>
+              </select>
+            </div>
+          </div>
+          <button id="propertySubmitBtn" onclick="addNewProperty()" class="btn-primary">Add Property</button>
+        </div>
+
+        <div class="list-section">
+          <h3>All Properties on Display</h3>
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Price</th>
+                <th>Tag</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="propertyDashboardList"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Staff Management Dashboard Tab -->
+      <section id="staffDashboard" class="admin-tab">
+        <h2>Staff Management Dashboard</h2>
+        
+        <div class="form-section">
+          <h3>Add New Staff Member</h3>
+          <div class="form-grid-2">
+            <input type="text" id="staffName" placeholder="Full name">
+            <input type="email" id="staffEmail" placeholder="Email address">
+            <input type="password" id="staffPassword" placeholder="Password">
+            <input type="text" id="staffPosition" placeholder="Position (e.g., Sales Executive)">
+          </div>
+          <div style="margin-top:0.5rem;">
+            <label style="font-size:0.8rem;color:rgba(255,255,255,0.6);">Staff Picture</label>
+            <input type="file" id="staffImageFile" accept="image/*">
+            <div id="staffImagePreview" style="margin-top:0.5rem;display:none;">
+              <img id="staffImagePreviewImg" style="max-width:80px;border-radius:50%;border:2px solid rgba(251,188,31,0.3);">
+              <input type="hidden" id="staffImage">
+            </div>
+          </div>
+          <button onclick="addNewStaff()" class="btn-primary">Add Staff</button>
+        </div>
+
+        <div class="list-section">
+          <h3>All Staff Members</h3>
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Position</th>
+                <th>Status</th>
+                <th>Joined</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="staffDashboardList"></tbody>
+          </table>
+        </div>
+
+        <div class="list-section" style="margin-top: 2rem;">
+          <h3>All Admins</h3>
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Position</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="adminList"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Events Management Dashboard Tab -->
+      <section id="eventsDashboard" class="admin-tab">
+        <h2>Events Management Dashboard</h2>
+        
+        <div class="form-section">
+          <h3>Create New Event</h3>
+          <div class="form-grid-2">
+            <input type="text" id="eventTitle" placeholder="Event title">
+            <input type="text" id="eventLocation" placeholder="Event location">
+            <input type="date" id="eventDate">
+            <input type="time" id="eventTime">
+          </div>
+          <textarea id="eventDescription" placeholder="Event description" class="form-grid-full"></textarea>
+          <input type="text" id="eventImage" placeholder="Image path (optional)" class="form-grid-full">
+          <button onclick="createNewEvent()" class="btn-primary">Create Event</button>
+        </div>
+
+        <div class="list-section">
+          <h3>Upcoming Events</h3>
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Location</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="eventsList"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Orders Dashboard Tab -->
+      <section id="ordersManager" class="admin-tab">
+        <h2>Manage Orders & Customers</h2>
+        
+        <div class="list-section">
+          <h3>All Orders</h3>
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Email</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="ordersList"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Payments Dashboard Tab -->
+      <section id="paymentsManager" class="admin-tab">
+        <h2>Payments & Real-Time Updates</h2>
+        
+        <div class="form-section">
+          <h3>Payment Monitoring</h3>
+          <div class="form-grid-2">
+            <button onclick="loadPaymentsRealtime()" class="btn-primary">Refresh Now</button>
+            <label style="display: flex; align-items: center; gap: 0.5rem;">
+              <input type="checkbox" id="autoRefreshPayments" onchange="togglePaymentAutoRefresh(this.checked)">
+              Auto-Refresh (every 10s)
+            </label>
+          </div>
+        </div>
+        
+        <div class="list-section">
+          <h3>Payment Transactions</h3>
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Reference</th>
+                <th>Order ID</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="paymentsList"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Audit Trail Tab -->
+      <section id="auditTrail" class="admin-tab">
+        <h2>Audit Trail & Activity Log</h2>
+        
+        <div class="form-section">
+          <h3>Activity Log Summary</h3>
+          <div class="stats-overview">
+            <div class="stat-box">
+              <p>Total Activities</p>
+              <h3 id="totalActivities">0</h3>
+            </div>
+            <div class="stat-box">
+              <p>Active Users</p>
+              <h3 id="activeUsers">0</h3>
+            </div>
+            <div class="stat-box">
+              <p>Last Activity</p>
+              <p id="lastActivityTime" style="font-size: 0.9rem; color: rgba(255,255,255,0.6);">Never</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h3>Filter & Search</h3>
+          <div class="form-grid-2">
+            <select id="filterActivityType">
+              <option value="">All Activity Types</option>
+              <option value="LOGIN_SUCCESS">Login Success</option>
+              <option value="LOGIN_FAILED">Login Failed</option>
+              <option value="USER_CREATED">User Created</option>
+              <option value="USER_DELETED">User Deleted</option>
+              <option value="USER_PROMOTED">User Promoted</option>
+              <option value="USER_DEMOTED">User Demoted</option>
+              <option value="CONTENT_UPDATED">Content Updated</option>
+              <option value="PROPERTY_ADDED">Property Added</option>
+              <option value="ORDER_CREATED">Order Created</option>
+              <option value="PAYMENT_VERIFIED">Payment Verified</option>
+            </select>
+            <input type="text" id="filterActivityUser" placeholder="Filter by user/email">
+          </div>
+          <button onclick="loadActivityLog()" class="btn-primary">Refresh Log</button>
+          <button onclick="clearAllActivityLogs()" class="btn-ghost">Clear All Logs</button>
+        </div>
+
+        <div class="list-section">
+          <h3>Activity Log Entries</h3>
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Timestamp</th>
+                <th>Activity Type</th>
+                <th>User</th>
+                <th>Details</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="activityLogList"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Settings Tab -->
+      <section id="settings" class="admin-tab">
+        <h2>Settings</h2>
+        <div class="form-section">
+          <p style="color: rgba(255,255,255,0.7); line-height: 1.7;">System configuration and advanced settings coming soon. This section will allow you to manage application-wide settings, notifications, and integrations.</p>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <!-- Event Edit Modal -->
+  <div class="modal-overlay" id="eventEditModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Edit Event</h2>
+        <button class="modal-close-btn" onclick="closeEventEditModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <div>
+          <label>Event Title</label>
+          <input type="text" id="modalEventTitle" placeholder="Event title">
+        </div>
+        <div>
+          <label>Description</label>
+          <textarea id="modalEventDescription" placeholder="Event description"></textarea>
+        </div>
+        <div class="form-grid-2">
+          <div>
+            <label>Date</label>
+            <input type="date" id="modalEventDate">
+          </div>
+          <div>
+            <label>Time</label>
+            <input type="time" id="modalEventTime">
+          </div>
+        </div>
+        <div>
+          <label>Location</label>
+          <input type="text" id="modalEventLocation" placeholder="Event location">
+        </div>
+        <div>
+          <label>Image URL (optional)</label>
+          <input type="text" id="modalEventImage" placeholder="Image path">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-ghost" onclick="closeEventEditModal()">Cancel</button>
+        <button class="btn-primary" onclick="saveEventEdit()">Save Changes</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Real-time Status Panel -->
+  <div id="realtimePanel" style="position: fixed; bottom: 30px; right: 30px; z-index: 999; display: none;">
+    <div style="background: rgba(0,0,0,0.95); border: 2px solid rgba(76,175,80,0.6); border-radius: 12px; padding: 1rem 1.5rem; backdrop-filter: blur(10px); box-shadow: 0 8px 32px rgba(0,0,0,0.5);">
+      <div class="realtime-indicator">
+        <div class="realtime-dot"></div>
+        <span id="realtimeText" style="font-weight: 600; letter-spacing: 0.05em;">Connecting...</span>
+      </div>
+      <p style="margin: 0.5rem 0 0 0; font-size: 0.75rem; color: rgba(255,255,255,0.4);">Auto-sync every 3s</p>
+    </div>
+  </div>
+
+  <script>
+    const stored = sessionStorage.getItem('staffDashboardUser');
+    if (!stored) {
+      window.location.href = 'staff-login.html';
+    }
+
+    const admin = JSON.parse(stored);
+    if (admin.role !== 'admin') {
+      alert('Access denied. Admin only.');
+      window.location.href = 'staff-dashboard.html';
+    }
+
+    document.getElementById('adminName').textContent = admin.name;
+
+    async function loadDashboardStats() {
+      const result = await getDashboardStats();
+      if (result.ok) {
+        document.getElementById('statStaff').textContent = result.data.staffCount;
+        document.getElementById('statAdmins').textContent = result.data.adminCount;
+        document.getElementById('statProperties').textContent = result.data.totalProperties;
+        document.getElementById('statOrders').textContent = result.data.totalOrders;
+      }
+    }
+
+    async function renderStaffList() {
+      const result = await getUsers('staff');
+      const tbody = document.getElementById('staffDashboardList');
+      if (!result.ok) {
+        tbody.innerHTML = '<tr><td colspan="6">Unable to load staff.</td></tr>';
+        return;
+      }
+      const staffOnly = result.data;
+      tbody.innerHTML = staffOnly.map(staff => `
+        <tr>
+          <td>${staff.name}</td>
+          <td>${staff.email}</td>
+          <td>${staff.position}</td>
+          <td><span class="status-badge ${staff.status === 'active' ? 'active' : 'inactive'}">${staff.status || 'active'}</span></td>
+          <td>${staff.joinedAt || 'N/A'}</td>
+          <td>
+            <button onclick="removeStaffMember('${staff.email}')" class="btn-action danger">Remove</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    async function renderAdminList() {
+      const result = await getUsers('admin');
+      const tbody = document.getElementById('adminList');
+      if (!result.ok) {
+        tbody.innerHTML = '<tr><td colspan="4">Unable to load admins.</td></tr>';
+        return;
+      }
+      const admins = result.data;
+      tbody.innerHTML = admins.map(adm => `
+        <tr>
+          <td>${adm.name}</td>
+          <td>${adm.email}</td>
+          <td>${adm.position}</td>
+          <td>${adm.email === admin.email ? '(Current)' : `<button onclick="demoteAdmin('${adm.email}')" class="btn-action danger">Demote</button>`}</td>
+        </tr>
+      `).join('');
+    }
+
+    // Staff image file input preview
+    document.addEventListener('change', function(e) {
+      if (e.target && e.target.id === 'staffImageFile') {
+        const file = e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function(ev) {
+            const preview = document.getElementById('staffImagePreview');
+            const img = document.getElementById('staffImagePreviewImg');
+            img.src = ev.target.result;
+            preview.style.display = 'block';
+          };
+          reader.readAsDataURL(file);
+        }
+      }
+    });
+
+    async function addNewStaff() {
+      const name = document.getElementById('staffName').value.trim();
+      const email = document.getElementById('staffEmail').value.trim().toLowerCase();
+      const password = document.getElementById('staffPassword').value;
+      const position = document.getElementById('staffPosition').value.trim();
+      const fileInput = document.getElementById('staffImageFile');
+
+      if (!name || !email || !password || !position) {
+        alert('Please fill in all fields.');
+        return;
+      }
+
+      let image = document.getElementById('staffImage').value || '';
+      if (fileInput.files.length > 0) {
+        try {
+          image = await uploadImage(fileInput.files[0]);
+        } catch (err) {
+          alert('Image upload failed: ' + err.message);
+          return;
+        }
+      }
+
+      const result = await addUser(email, password, name, position, image);
+      if (!result.ok) {
+        alert(result.data.error || 'Unable to add staff member.');
+        return;
+      }
+
+      await Promise.all([renderStaffList(), renderAdminList(), loadDashboardStats()]);
+      alert('Staff added successfully.');
+      document.getElementById('staffName').value = '';
+      document.getElementById('staffEmail').value = '';
+      document.getElementById('staffPassword').value = '';
+      document.getElementById('staffPosition').value = '';
+      document.getElementById('staffImageFile').value = '';
+      document.getElementById('staffImagePreview').style.display = 'none';
+      document.getElementById('staffImage').value = '';
+    }
+
+    async function removeStaffMember(email) {
+      if (!confirm('Are you sure you want to remove this staff member?')) return;
+      const result = await deleteUser(email);
+      if (!result.ok) {
+        alert(result.data.error || 'Unable to remove staff.');
+        return;
+      }
+      await Promise.all([renderStaffList(), renderAdminList(), loadDashboardStats()]);
+      alert('Staff removed.');
+    }
+
+    async function demoteAdmin(email) {
+      if (email === admin.email) {
+        alert('Cannot demote yourself.');
+        return;
+      }
+      if (!confirm('Are you sure you want to demote this admin?')) return;
+      const result = await demoteUser(email);
+      if (!result.ok) {
+        alert(result.data.error || 'Unable to demote admin.');
+        return;
+      }
+      await Promise.all([renderStaffList(), renderAdminList(), loadDashboardStats()]);
+      alert('Admin demoted to staff.');
+    }
+
+    async function loadContentValues() {
+      const result = await loadContent();
+      if (!result.ok) {
+        alert('Unable to load page content from backend.');
+        return;
+      }
+      const content = result.data;
+      document.getElementById('heroTitle').value = content.heroTitle || '';
+      document.getElementById('heroSubtitle').value = content.heroSubtitle || '';
+      document.getElementById('heroPrimaryCTA').value = content.heroPrimaryCTA || 'Browse Properties';
+      document.getElementById('heroPrimaryLink').value = content.heroPrimaryLink || '#shop-properties';
+      document.getElementById('heroSecondaryCTA').value = content.heroSecondaryCTA || 'Browse Events';
+      document.getElementById('heroSecondaryLink').value = content.heroSecondaryLink || '#shop-events';
+      document.getElementById('aboutTitle').value = content.aboutTitle || '';
+      document.getElementById('aboutDescription').value = content.aboutDescription || '';
+      document.getElementById('whatsappNumber').value = content.whatsappNumber || '+2349113054932';
+      document.getElementById('emailAddress').value = content.emailAddress || 'info@ginormousinvestments.com';
+      document.getElementById('contactHeading').value = content.contactHeading || 'Have Questions? Our team is ready to help.';
+      document.getElementById('contactSubtitle').value = content.contactSubtitle || 'Contact us for more information, site visits, or payment plan details.';
+      document.getElementById('contactWhatsAppLabel').value = content.contactWhatsAppLabel || 'Chat on WhatsApp';
+      document.getElementById('contactEmailLabel').value = content.contactEmailLabel || 'Send an Email';
+    }
+
+    async function updateHeroContent() {
+      const title = document.getElementById('heroTitle').value;
+      const subtitle = document.getElementById('heroSubtitle').value;
+      if (!title || !subtitle) {
+        alert('Please fill in all fields.');
+        return;
+      }
+      const result = await saveContent({ heroTitle: title, heroSubtitle: subtitle });
+      if (!result.ok) {
+        alert(result.data.error || 'Unable to update hero content.');
+        return;
+      }
+      alert('✓ Hero section updated successfully.');
+    }
+
+    async function updateHeroCTAs() {
+      const primaryText = document.getElementById('heroPrimaryCTA').value.trim();
+      const primaryLink = document.getElementById('heroPrimaryLink').value.trim();
+      const secondaryText = document.getElementById('heroSecondaryCTA').value.trim();
+      const secondaryLink = document.getElementById('heroSecondaryLink').value.trim();
+      if (!primaryText || !primaryLink || !secondaryText || !secondaryLink) {
+        alert('Please fill in all hero CTA fields.');
+        return;
+      }
+      const result = await saveContent({ heroPrimaryCTA: primaryText, heroPrimaryLink: primaryLink, heroSecondaryCTA: secondaryText, heroSecondaryLink: secondaryLink });
+      if (!result.ok) {
+        alert(result.data.error || 'Unable to update hero CTAs.');
+        return;
+      }
+      alert('✓ Hero CTA buttons updated successfully.');
+    }
+
+    async function updateAboutContent() {
+      const title = document.getElementById('aboutTitle').value;
+      const description = document.getElementById('aboutDescription').value;
+      if (!title || !description) {
+        alert('Please fill in all fields.');
+        return;
+      }
+      const result = await saveContent({ aboutTitle: title, aboutDescription: description });
+      if (!result.ok) {
+        alert(result.data.error || 'Unable to update about content.');
+        return;
+      }
+      alert('✓ About section updated successfully.');
+    }
+
+    async function updateContactInfo() {
+      const whatsapp = document.getElementById('whatsappNumber').value;
+      const email = document.getElementById('emailAddress').value;
+      if (!whatsapp || !email) {
+        alert('Please fill in all fields.');
+        return;
+      }
+      const result = await saveContent({ whatsappNumber: whatsapp, emailAddress: email });
+      if (!result.ok) {
+        alert(result.data.error || 'Unable to update contact info.');
+        return;
+      }
+      alert('✓ Contact info updated successfully.');
+    }
+
+    async function updateContactCTA() {
+      const heading = document.getElementById('contactHeading').value.trim();
+      const subtitle = document.getElementById('contactSubtitle').value.trim();
+      const whatsappLabel = document.getElementById('contactWhatsAppLabel').value.trim();
+      const emailLabel = document.getElementById('contactEmailLabel').value.trim();
+      if (!heading || !subtitle || !whatsappLabel || !emailLabel) {
+        alert('Please fill in all contact CTA fields.');
+        return;
+      }
+      const result = await saveContent({ contactHeading: heading, contactSubtitle: subtitle, contactWhatsAppLabel: whatsappLabel, contactEmailLabel: emailLabel });
+      if (!result.ok) {
+        alert(result.data.error || 'Unable to update contact CTA.');
+        return;
+      }
+      alert('✓ Contact CTA section updated successfully.');
+    }
+
+    async function saveAllContent() {
+      const payload = {
+        heroTitle: document.getElementById('heroTitle').value.trim(),
+        heroSubtitle: document.getElementById('heroSubtitle').value.trim(),
+        heroPrimaryCTA: document.getElementById('heroPrimaryCTA').value.trim(),
+        heroPrimaryLink: document.getElementById('heroPrimaryLink').value.trim(),
+        heroSecondaryCTA: document.getElementById('heroSecondaryCTA').value.trim(),
+        heroSecondaryLink: document.getElementById('heroSecondaryLink').value.trim(),
+        aboutTitle: document.getElementById('aboutTitle').value.trim(),
+        aboutDescription: document.getElementById('aboutDescription').value.trim(),
+        whatsappNumber: document.getElementById('whatsappNumber').value.trim(),
+        emailAddress: document.getElementById('emailAddress').value.trim(),
+        contactHeading: document.getElementById('contactHeading').value.trim(),
+        contactSubtitle: document.getElementById('contactSubtitle').value.trim(),
+        contactWhatsAppLabel: document.getElementById('contactWhatsAppLabel').value.trim(),
+        contactEmailLabel: document.getElementById('contactEmailLabel').value.trim()
+      };
+      const result = await saveContent(payload);
+      if (!result.ok) {
+        alert(result.data.error || 'Unable to save page content.');
+        return;
+      }
+      alert('✓ All page content saved successfully.');
+    }
+
+    document.querySelectorAll('.admin-nav .nav-link').forEach(link => {
+     link.addEventListener('click', (e) => {
+       e.preventDefault();
+       document.querySelectorAll('.admin-tab').forEach(tab => tab.classList.remove('active'));
+       document.querySelectorAll('.admin-nav .nav-link').forEach(a => a.classList.remove('active'));
+       const tabId = link.getAttribute('href').slice(1);
+       document.getElementById(tabId).classList.add('active');
+       link.classList.add('active');
+     });
+    });
+
+    document.getElementById('adminLogout').addEventListener('click', () => {
+     sessionStorage.removeItem('staffDashboardUser');
+     window.location.href = 'staff-login.html';
+    });
+
+    async function initAdminDashboard() {
+      await Promise.all([
+        renderStaffList(), 
+        renderAdminList(),
+        loadDashboardStats(), 
+        loadContentValues(), 
+        renderPropertiesList(), 
+        renderOrdersList(), 
+        renderPaymentsList(),
+        loadActivityLog(),
+        loadPropertyDashboard(),
+        loadEventsDashboard(),
+        loadStaffDashboard()
+      ]);
+    }
+
+    // Properties Management Functions
+    let propertiesCache = [];
+    let editingPropertyIndex = null;
+
+    async function renderPropertiesList() {
+      const result = await getProperties();
+      propertiesCache = result.data || [];
+      const tbody = document.getElementById('propertyDashboardList');
+      if (!result.ok || !Array.isArray(propertiesCache)) {
+        tbody.innerHTML = '<tr><td colspan="5">Unable to load properties.</td></tr>';
+        return;
+      }
+      tbody.innerHTML = propertiesCache.map((prop, idx) => `
+        <tr>
+          <td>${prop.title}</td>
+          <td>₦${(prop.price).toLocaleString()}</td>
+          <td>${prop.tag}</td>
+          <td><span class="status-badge" style="background: ${prop.status === 'available' ? '#4CAF50' : prop.status === 'reserved' ? '#FF9800' : '#f44336'};">${prop.status}</span></td>
+          <td>
+            <button onclick="editProperty(${idx})" class="btn-action">Edit</button>
+            <button onclick="removeProperty('${prop.id}')" class="btn-action danger">Delete</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    // Image upload helper
+    async function uploadImage(file) {
+      const formData = new FormData();
+      formData.append('image', file);
+      const response = await fetch(`${API_BASE}/upload`, { method: 'POST', body: formData });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.error || 'Upload failed');
+      return result.url;
+    }
+
+    // Setup image file input preview
+    document.addEventListener('change', function(e) {
+      if (e.target && e.target.id === 'propImageFile') {
+        const file = e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function(ev) {
+            const preview = document.getElementById('propImagePreview');
+            const img = document.getElementById('propImagePreviewImg');
+            img.src = ev.target.result;
+            preview.style.display = 'block';
+          };
+          reader.readAsDataURL(file);
+        }
+      }
+    });
+
+    async function addNewProperty() {
+      const title = document.getElementById('propTitle').value.trim();
+      const description = document.getElementById('propDescription').value.trim();
+      const tag = document.getElementById('propTag').value.trim();
+      const plotPrice = parseInt(document.getElementById('propPricePlot').value);
+      const acrePrice = parseInt(document.getElementById('propPriceAcre').value);
+      const hectarePrice = parseInt(document.getElementById('propPriceHectare').value);
+      const meta = document.getElementById('propMeta').value.trim();
+      const status = document.getElementById('propStatus').value;
+      const fileInput = document.getElementById('propImageFile');
+
+      if (!title || !description || !tag) {
+        alert('Please fill in title, description, and tag.');
+        return;
+      }
+      if (!plotPrice && !acrePrice && !hectarePrice) {
+        alert('Please enter at least the plot price.');
+        return;
+      }
+
+      // Upload image if file selected
+      let image = document.getElementById('propImage').value || '';
+      if (fileInput.files.length > 0) {
+        try {
+          image = await uploadImage(fileInput.files[0]);
+        } catch (err) {
+          alert('Image upload failed: ' + err.message);
+          return;
+        }
+      }
+
+      const prices = {
+        plot: plotPrice || 0,
+        acre: acrePrice || Math.round((plotPrice || 0) * 2.4),
+        hectare: hectarePrice || Math.round((plotPrice || 0) * 6)
+      };
+      const defaultMeta = meta || `From ₦${(prices.plot).toLocaleString()} · Flexible payment plans`;
+
+      const result = await addProperty(title, description, tag, prices.plot, defaultMeta, image, status, prices);
+      if (!result.ok) {
+        alert(result.data.error || 'Unable to add property.');
+        return;
+      }
+
+      await loadPropertyDashboard();
+      alert('Property added successfully.');
+      resetPropertyForm();
+    }
+
+    function resetPropertyForm() {
+      document.getElementById('propTitle').value = '';
+      document.getElementById('propDescription').value = '';
+      document.getElementById('propTag').value = '';
+      document.getElementById('propPricePlot').value = '';
+      document.getElementById('propPriceAcre').value = '';
+      document.getElementById('propPriceHectare').value = '';
+      document.getElementById('propMeta').value = '';
+      document.getElementById('propImage').value = '';
+      document.getElementById('propImageFile').value = '';
+      document.getElementById('propImagePreview').style.display = 'none';
+      document.getElementById('propStatus').value = 'available';
+      editingPropertyIndex = null;
+      const submitBtn = document.getElementById('propertySubmitBtn');
+      submitBtn.textContent = 'Add Property';
+      submitBtn.setAttribute('onclick', 'addNewProperty()');
+    }
+
+    function editProperty(idx) {
+      const prop = propertiesCache[idx];
+      document.getElementById('propTitle').value = prop.title;
+      document.getElementById('propDescription').value = prop.description;
+      document.getElementById('propTag').value = prop.tag;
+      
+      const prices = prop.prices || {};
+      document.getElementById('propPricePlot').value = prices.plot || prop.price || 0;
+      document.getElementById('propPriceAcre').value = prices.acre || Math.round((prices.plot || prop.price || 0) * 2.4);
+      document.getElementById('propPriceHectare').value = prices.hectare || Math.round((prices.plot || prop.price || 0) * 6);
+      
+      document.getElementById('propMeta').value = prop.meta || '';
+      document.getElementById('propImage').value = prop.image || '';
+      if (prop.image) {
+        const preview = document.getElementById('propImagePreview');
+        const img = document.getElementById('propImagePreviewImg');
+        img.src = prop.image.startsWith('http') || prop.image.startsWith('uploads/') ? '/' + prop.image : prop.image;
+        preview.style.display = 'block';
+      }
+      document.getElementById('propStatus').value = prop.status;
+      editingPropertyIndex = idx;
+      
+      const submitBtn = document.getElementById('propertySubmitBtn');
+      submitBtn.textContent = 'Update Property';
+      submitBtn.setAttribute('onclick', 'updateExistingProperty()');
+    }
+
+    async function updateExistingProperty() {
+      if (editingPropertyIndex === null) return;
+      const prop = propertiesCache[editingPropertyIndex];
+      
+      const title = document.getElementById('propTitle').value.trim();
+      const description = document.getElementById('propDescription').value.trim();
+      const tag = document.getElementById('propTag').value.trim();
+      const plotPrice = parseInt(document.getElementById('propPricePlot').value);
+      const acrePrice = parseInt(document.getElementById('propPriceAcre').value);
+      const hectarePrice = parseInt(document.getElementById('propPriceHectare').value);
+      const meta = document.getElementById('propMeta').value.trim();
+      const status = document.getElementById('propStatus').value;
+      const fileInput = document.getElementById('propImageFile');
+
+      if (!title || !description || !tag) {
+        alert('Please fill in title, description, and tag.');
+        return;
+      }
+
+      let image = document.getElementById('propImage').value || prop.image || '';
+      if (fileInput.files.length > 0) {
+        try {
+          image = await uploadImage(fileInput.files[0]);
+        } catch (err) {
+          alert('Image upload failed: ' + err.message);
+          return;
+        }
+      }
+
+      const prices = {
+        plot: plotPrice || prop.price || 0,
+        acre: acrePrice || Math.round((plotPrice || prop.price || 0) * 2.4),
+        hectare: hectarePrice || Math.round((plotPrice || prop.price || 0) * 6)
+      };
+      const defaultMeta = meta || `From ₦${(prices.plot).toLocaleString()} · Flexible payment plans`;
+
+      const result = await updateProperty(prop.id, {
+        title, description, tag, price: prices.plot,
+        meta: defaultMeta, image, status, prices
+      });
+      if (!result.ok) {
+        alert(result.data.error || 'Unable to update property.');
+        return;
+      }
+
+      resetPropertyForm();
+      await loadPropertyDashboard();
+      alert('Property updated successfully.');
+    }
+
+    async function removeProperty(propId) {
+      if (!confirm('Are you sure you want to delete this property?')) return;
+      const result = await deleteProperty(propId);
+      if (!result.ok) {
+        alert('Unable to delete property.');
+        return;
+      }
+      await loadPropertyDashboard();
+      alert('Property deleted successfully.');
+    }
+
+    // Orders Management Functions
+    let ordersCache = [];
+
+    async function renderOrdersList() {
+      const result = await getOrders();
+      ordersCache = result.data || [];
+      const tbody = document.getElementById('ordersList');
+      if (!result.ok || !Array.isArray(ordersCache)) {
+        tbody.innerHTML = '<tr><td colspan="7">Unable to load orders.</td></tr>';
+        return;
+      }
+      tbody.innerHTML = ordersCache.map(order => `
+        <tr>
+          <td>${order.id}</td>
+          <td>${order.customerName}</td>
+          <td>${order.customerEmail}</td>
+          <td>₦${(order.amount).toLocaleString()}</td>
+          <td><span class="status-badge" style="background: ${order.status === 'pending' ? '#FF9800' : order.status === 'paid' ? '#4CAF50' : '#f44336'};">${order.status}</span></td>
+          <td>${new Date(order.createdAt).toLocaleDateString()}</td>
+          <td>
+            <select onchange="updateOrderStatus('${order.id}', this.value); this.value='';" class="btn-action">
+              <option value="">Change status</option>
+              <option value="pending">Pending</option>
+              <option value="paid">Paid</option>
+              <option value="failed">Failed</option>
+            </select>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    async function updateOrderStatus(orderId, newStatus) {
+      if (!newStatus) return;
+      const order = ordersCache.find(o => o.id === orderId);
+      if (!order) {
+        alert('Order not found.');
+        return;
+      }
+      order.status = newStatus;
+      const result = await updateOrder(orderId, { status: newStatus });
+      if (!result.ok) {
+        alert('Unable to update order status.');
+        return;
+      }
+      await renderOrdersList();
+      alert(`Order status updated to ${newStatus}.`);
+    }
+
+    // Payments Management Functions
+    let paymentsCache = [];
+
+    async function renderPaymentsList() {
+      const result = await getOrders();
+      const ordersData = result.data || [];
+      
+      paymentsCache = [];
+      ordersData.forEach(order => {
+        paymentsCache.push({
+          reference: `pay_${order.id.replace('order_', '')}`,
+          orderId: order.id,
+          amount: order.amount,
+          status: order.status,
+          createdAt: order.createdAt
+        });
+      });
+
+      const tbody = document.getElementById('paymentsList');
+      if (paymentsCache.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6">No payment records found.</td></tr>';
+        return;
+      }
+      tbody.innerHTML = paymentsCache.map(payment => `
+        <tr>
+          <td>${payment.reference}</td>
+          <td>${payment.orderId}</td>
+          <td>₦${(payment.amount).toLocaleString()}</td>
+          <td><span class="status-badge" style="background: ${payment.status === 'pending' ? '#FF9800' : payment.status === 'paid' ? '#4CAF50' : '#f44336'};">${payment.status}</span></td>
+          <td>${new Date(payment.createdAt).toLocaleString()}</td>
+          <td>
+            <button onclick="verifyPaymentAdmin('${payment.reference}', true)" class="btn-action" style="color: #4CAF50;">Verify</button>
+            <button onclick="verifyPaymentAdmin('${payment.reference}', false)" class="btn-action danger">Reject</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    async function verifyPaymentAdmin(reference, approve) {
+      if (!confirm(`Are you sure you want to ${approve ? 'verify' : 'reject'} this payment?`)) return;
+      const result = await verifyPayment(reference, approve);
+      if (!result.ok) {
+        alert(`Unable to ${approve ? 'verify' : 'reject'} payment.`);
+        return;
+      }
+      await renderPaymentsList();
+      alert(`Payment ${approve ? 'verified' : 'rejected'} successfully.`);
+    }
+
+    // Activity Log Functions
+    async function loadActivityLog() {
+      const type = document.getElementById('filterActivityType').value || null;
+      const user = document.getElementById('filterActivityUser').value.trim() || null;
+      const result = await getActivityLog(type, user, 500);
+      
+      if (!result.ok) {
+        document.getElementById('activityLogList').innerHTML = '<tr><td colspan="5">Unable to load activity log.</td></tr>';
+        return;
+      }
+      
+      const activities = result.data || [];
+      const tbody = document.getElementById('activityLogList');
+      
+      if (activities.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5">No activities recorded.</td></tr>';
+      } else {
+        tbody.innerHTML = activities.map(activity => {
+          const timestamp = new Date(activity.timestamp);
+          const formattedTime = timestamp.toLocaleString();
+          return `
+            <tr>
+              <td>${formattedTime}</td>
+              <td><span class="status-badge" style="background: #2196F3; font-size: 0.85rem;">${activity.type}</span></td>
+              <td>${activity.user}</td>
+              <td style="font-size: 0.9rem; color: var(--gray);">${activity.details}</td>
+              <td><button onclick="deleteActivityLogEntry('${activity.id}')" class="btn-action danger" style="font-size: 0.85rem;">Delete</button></td>
+            </tr>
+          `;
+        }).join('');
+      }
+      
+      // Load and display stats
+      const statsResult = await getActivityLogStats();
+      if (statsResult.ok) {
+        const stats = statsResult.data;
+        document.getElementById('totalActivities').textContent = stats.totalActivities;
+        document.getElementById('activeUsers').textContent = stats.usersActive.length;
+        if (stats.lastActivity) {
+          const lastTime = new Date(stats.lastActivity);
+          document.getElementById('lastActivityTime').textContent = lastTime.toLocaleString();
+        }
+      }
+    }
+
+    async function deleteActivityLogEntry(id) {
+      if (!confirm('Are you sure you want to delete this activity log entry?')) return;
+      const result = await deleteActivityLog(id);
+      if (!result.ok) {
+        alert('Unable to delete activity log entry.');
+        return;
+      }
+      await loadActivityLog();
+      alert('Activity log entry deleted.');
+    }
+
+    async function clearAllActivityLogs() {
+      if (!confirm('Are you sure you want to clear ALL activity logs? This cannot be undone.')) return;
+      if (!confirm('Are you REALLY sure? This will permanently delete all audit trail data.')) return;
+      
+      const result = await clearActivityLog();
+      if (!result.ok) {
+        alert('Unable to clear activity logs.');
+        return;
+      }
+      await loadActivityLog();
+      alert(`✓ Activity logs cleared. ${result.data.deletedCount} entries were removed.`);
+    }
+
+    // Property Dashboard Functions
+    async function loadPropertyDashboard() {
+      const result = await getProperties();
+      const tbody = document.getElementById('propertyDashboardList');
+      if (!result.ok || !Array.isArray(result.data)) {
+        tbody.innerHTML = '<tr><td colspan="5">Unable to load properties.</td></tr>';
+        return;
+      }
+      const properties = result.data;
+      propertiesCache = properties;
+      if (properties.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5">No properties added yet.</td></tr>';
+      } else {
+        tbody.innerHTML = properties.map(prop => `
+          <tr>
+            <td>${prop.title}</td>
+            <td>₦${(prop.price).toLocaleString()}</td>
+            <td>${prop.tag}</td>
+            <td><span class="status-badge" style="background: ${prop.status === 'available' ? '#4CAF50' : prop.status === 'reserved' ? '#FF9800' : '#f44336'};">${prop.status}</span></td>
+            <td>
+              <button onclick="editPropertyDashboard('${prop.id}')" class="btn-action">Edit</button>
+              <button onclick="deletePropertyDashboard('${prop.id}')" class="btn-action danger">Delete</button>
+            </td>
+          </tr>
+        `).join('');
+      }
+    }
+
+    function editPropertyDashboard(id) {
+      const idx = propertiesCache.findIndex(p => p.id === id);
+      if (idx === -1) return;
+      editProperty(idx);
+    }
+
+    async function deletePropertyDashboard(id) {
+      if (!confirm('Are you sure you want to delete this property?')) return;
+      const result = await deleteProperty(id);
+      if (!result.ok) {
+        alert('Unable to delete property.');
+        return;
+      }
+      await loadPropertyDashboard();
+      alert('Property deleted successfully.');
+    }
+
+    // Staff Dashboard Functions
+    async function loadStaffDashboard() {
+      const result = await getUsers();
+      const tbody = document.getElementById('staffDashboardList');
+      if (!result.ok || !Array.isArray(result.data)) {
+        tbody.innerHTML = '<tr><td colspan="6">Unable to load staff.</td></tr>';
+        return;
+      }
+      const staff = result.data.filter(u => u.role === 'staff');
+      if (staff.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6">No staff members.</td></tr>';
+      } else {
+        tbody.innerHTML = staff.map(member => `
+          <tr>
+            <td>${member.name}</td>
+            <td>${member.email}</td>
+            <td>${member.position}</td>
+            <td><span class="status-badge ${member.status === 'active' ? 'active' : 'inactive'}">${member.status || 'active'}</span></td>
+            <td>${member.joinedAt || 'N/A'}</td>
+            <td>
+              <button onclick="suspendStaffMember('${member.email}')" class="btn-action" style="color: #FF9800;">Suspend</button>
+              <button onclick="removeStaffMember('${member.email}')" class="btn-action danger">Remove</button>
+            </td>
+          </tr>
+        `).join('');
+      }
+    }
+
+    async function suspendStaffMember(email) {
+      if (!confirm('Are you sure you want to suspend this staff member?')) return;
+      const result = await suspendUser(email);
+      if (!result.ok) {
+        alert('Unable to suspend staff member.');
+        return;
+      }
+      await loadStaffDashboard();
+      alert('Staff member suspended.');
+    }
+
+    // Events Dashboard Functions
+    async function loadEventsDashboard() {
+      const result = await getEvents();
+      const tbody = document.getElementById('eventsList');
+      if (!result.ok || !Array.isArray(result.data)) {
+        tbody.innerHTML = '<tr><td colspan="5">Unable to load events.</td></tr>';
+        return;
+      }
+      const events = result.data;
+      if (events.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5">No events scheduled.</td></tr>';
+      } else {
+        tbody.innerHTML = events.map(event => `
+          <tr>
+            <td>${event.title}</td>
+            <td>${event.date}</td>
+            <td>${event.time}</td>
+            <td>${event.location}</td>
+            <td>
+              <button onclick="editEventDashboard('${event.id}')" class="btn-action">Edit</button>
+              <button onclick="deleteEventDashboard('${event.id}')" class="btn-action danger">Delete</button>
+            </td>
+          </tr>
+        `).join('');
+      }
+    }
+
+    async function createNewEvent() {
+      const title = document.getElementById('eventTitle').value.trim();
+      const description = document.getElementById('eventDescription').value.trim();
+      const date = document.getElementById('eventDate').value;
+      const time = document.getElementById('eventTime').value;
+      const location = document.getElementById('eventLocation').value.trim();
+      const image = document.getElementById('eventImage').value.trim() || null;
+
+      if (!title || !date || !time || !location) {
+        alert('Please fill in all required fields.');
+        return;
+      }
+
+      const result = await createEvent(title, description, date, time, location, image);
+      if (!result.ok) {
+        alert(result.data.error || 'Unable to create event.');
+        return;
+      }
+
+      await loadEventsDashboard();
+      alert('Event created successfully.');
+      document.getElementById('eventTitle').value = '';
+      document.getElementById('eventDescription').value = '';
+      document.getElementById('eventDate').value = '';
+      document.getElementById('eventTime').value = '';
+      document.getElementById('eventLocation').value = '';
+      document.getElementById('eventImage').value = '';
+    }
+
+    async function deleteEventDashboard(id) {
+      if (!confirm('Are you sure you want to delete this event?')) return;
+      const result = await deleteEvent(id);
+      if (!result.ok) {
+        alert('Unable to delete event.');
+        return;
+      }
+      await loadEventsDashboard();
+      alert('Event deleted successfully.');
+    }
+
+    async function editEventDashboard(id) {
+      const result = await getEvents();
+      if (!result.ok) return;
+      
+      const event = result.data.find(e => e.id === id);
+      if (!event) return;
+      
+      document.getElementById('modalEventTitle').value = event.title;
+      document.getElementById('modalEventDescription').value = event.description || '';
+      document.getElementById('modalEventDate').value = event.date;
+      document.getElementById('modalEventTime').value = event.time;
+      document.getElementById('modalEventLocation').value = event.location;
+      document.getElementById('modalEventImage').value = event.image || '';
+      
+      window.currentEditingEventId = id;
+      document.getElementById('eventEditModal').style.display = 'flex';
+    }
+
+    function closeEventEditModal() {
+      document.getElementById('eventEditModal').style.display = 'none';
+      window.currentEditingEventId = null;
+    }
+
+    async function saveEventEdit() {
+      const id = window.currentEditingEventId;
+      if (!id) return;
+      
+      const title = document.getElementById('modalEventTitle').value.trim();
+      const description = document.getElementById('modalEventDescription').value.trim();
+      const date = document.getElementById('modalEventDate').value;
+      const time = document.getElementById('modalEventTime').value;
+      const location = document.getElementById('modalEventLocation').value.trim();
+      const image = document.getElementById('modalEventImage').value.trim() || null;
+
+      if (!title || !date || !time || !location) {
+        alert('Please fill in all required fields.');
+        return;
+      }
+
+      const result = await updateEvent(id, title, description, date, time, location, image);
+      if (!result.ok) {
+        alert('Unable to update event.');
+        return;
+      }
+
+      closeEventEditModal();
+      await loadEventsDashboard();
+      alert('Event updated successfully.');
+    }
+
+    // Real-time Update System
+    let realtimeUpdateInterval = null;
+
+    async function initRealtimeUpdates() {
+      showRealtimePanel(true);
+      updateRealtimePanel('Connecting...', '#FF9800');
+      
+      // Fetch initial data
+      await refreshAllDashboards();
+      
+      // Set up continuous polling for ALL dashboards
+      realtimeUpdateInterval = setInterval(async () => {
+        await refreshAllDashboards();
+      }, 3000);
+    }
+
+    async function refreshAllDashboards() {
+      try {
+        // Fetch all data
+        const properties = await getProperties();
+        const events = await getEvents();
+        const users = await getUsers();
+        const orders = await getOrders();
+        
+        if (properties.ok && events.ok && users.ok && orders.ok) {
+          updateRealtimePanel('Synced ✓', '#4CAF50');
+          
+          // Refresh ALL dashboards regardless of which one is active
+          try {
+            await loadPropertyDashboard();
+          } catch (e) {}
+          
+          try {
+            await loadEventsDashboard();
+          } catch (e) {}
+          
+          try {
+            await loadStaffDashboard();
+          } catch (e) {}
+          
+          try {
+            await loadPaymentsRealtime();
+          } catch (e) {}
+          
+          try {
+            await loadActivityLog();
+          } catch (e) {}
+        } else {
+          updateRealtimePanel('Sync Failed ✗', '#f44336');
+        }
+      } catch (error) {
+        updateRealtimePanel('Connection Lost ✗', '#FF9800');
+      }
+    }
+
+    function stopRealtimeUpdates() {
+      if (realtimeUpdateInterval) {
+        clearInterval(realtimeUpdateInterval);
+        realtimeUpdateInterval = null;
+      }
+      showRealtimePanel(false);
+    }
+
+    function showRealtimePanel(show) {
+      const panel = document.getElementById('realtimePanel');
+      if (panel) {
+        panel.style.display = show ? 'block' : 'none';
+      }
+    }
+
+    function updateRealtimePanel(text, color) {
+      const textEl = document.getElementById('realtimeText');
+      const dotEl = document.querySelector('.realtime-dot');
+      if (textEl) textEl.textContent = text;
+      if (dotEl) {
+        dotEl.style.boxShadow = `0 0 10px ${color}`;
+        dotEl.style.background = color;
+      }
+    }
+
+    // Close modal when clicking outside
+    document.addEventListener('click', function(event) {
+      const modal = document.getElementById('eventEditModal');
+      if (modal && event.target === modal) {
+        closeEventEditModal();
+      }
+    });
+
+    // Auto-start real-time updates on page load
+    window.addEventListener('load', function() {
+      setTimeout(() => initRealtimeUpdates(), 500);
+    });
+
+    // Cleanup on page unload
+    window.addEventListener('beforeunload', function() {
+      stopRealtimeUpdates();
+    });
+
+    // Real-Time Payments Functions
+    let paymentAutoRefreshInterval = null;
+
+    async function loadPaymentsRealtime() {
+      const result = await getOrders();
+      const tbody = document.getElementById('paymentsList');
+      
+      if (!result.ok || !Array.isArray(result.data)) {
+        tbody.innerHTML = '<tr><td colspan="6">Unable to load payments.</td></tr>';
+        return;
+      }
+
+      const orders = result.data;
+      if (orders.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6">No payment records found.</td></tr>';
+      } else {
+        tbody.innerHTML = orders.map(order => `
+          <tr>
+            <td>pay_${order.id.replace('order_', '')}</td>
+            <td>${order.id}</td>
+            <td>₦${(order.amount).toLocaleString()}</td>
+            <td><span class="status-badge" style="background: ${order.status === 'pending' ? '#FF9800' : order.status === 'paid' ? '#4CAF50' : '#f44336'};">${order.status}</span></td>
+            <td>${new Date(order.createdAt).toLocaleString()}</td>
+            <td>
+              <select onchange="updatePaymentStatus('${order.id}', this.value); this.value='';" class="btn-action">
+                <option value="">Change status</option>
+                <option value="pending">Pending</option>
+                <option value="paid">Paid</option>
+                <option value="failed">Failed</option>
+              </select>
+            </td>
+          </tr>
+        `).join('');
+      }
+    }
+
+    async function updatePaymentStatus(orderId, newStatus) {
+      if (!newStatus) return;
+      const result = await updateOrder(orderId, { status: newStatus });
+      if (!result.ok) {
+        alert(`Unable to update payment status to: ${newStatus}`);
+        return;
+      }
+      await loadPaymentsRealtime();
+      alert(`Payment status updated to ${newStatus}.`);
+    }
+
+    function togglePaymentAutoRefresh(enabled) {
+      if (enabled) {
+        paymentAutoRefreshInterval = setInterval(() => {
+          loadPaymentsRealtime();
+        }, 10000);
+        alert('Auto-refresh enabled. Updates every 10 seconds.');
+      } else {
+        if (paymentAutoRefreshInterval) {
+          clearInterval(paymentAutoRefreshInterval);
+          paymentAutoRefreshInterval = null;
+        }
+        alert('Auto-refresh disabled.');
+      }
+    }
+
+    initAdminDashboard();
+  </script>
+</body>
+</html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Integration Test — Ginormous Investments</title>
+  <link rel="stylesheet" href="Homepage/style.css">
+  <script src="Homepage/api.js"></script>
+  <style>
+    .test-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      font-family: 'Courier New', monospace;
+    }
+    .test-section {
+      background: rgba(251, 188, 31, 0.05);
+      border: 1px solid rgba(251, 188, 31, 0.2);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .test-result {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.75rem;
+      margin: 0.5rem 0;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 4px;
+      font-size: 0.9rem;
+    }
+    .test-result.pass {
+      border-left: 4px solid #4CAF50;
+    }
+    .test-result.fail {
+      border-left: 4px solid #f44336;
+    }
+    .test-result.pending {
+      border-left: 4px solid #FF9800;
+    }
+    .test-status {
+      font-weight: 600;
+      min-width: 100px;
+      text-align: right;
+    }
+    h1 {
+      color: var(--gold);
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    h2 {
+      color: var(--gold);
+      margin-top: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    button {
+      background: var(--gold);
+      color: black;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+      margin-top: 1rem;
+    }
+    button:hover {
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body class="admin-body">
+  <div class="test-container">
+    <h1>🔧 Backend-Frontend Integration Test</h1>
+    
+    <div class="test-section">
+      <h2>API Endpoints Testing</h2>
+      <div id="apiTests"></div>
+    </div>
+
+    <div class="test-section">
+      <h2>Authentication Flow</h2>
+      <div id="authTests"></div>
+    </div>
+
+    <div class="test-section">
+      <h2>Data Management</h2>
+      <div id="dataTests"></div>
+    </div>
+
+    <div class="test-section">
+      <h2>Quick Actions</h2>
+      <button onclick="runAllTests()">🚀 Run All Tests</button>
+      <button onclick="testLogin()">🔐 Test Login</button>
+      <button onclick="testContent()">📝 Test Content API</button>
+      <button onclick="testUsers()">👥 Test Users API</button>
+      <button onclick="testProperties()">🏠 Test Properties API</button>
+      <button onclick="testEvents()">📅 Test Events API</button>
+    </div>
+  </div>
+
+  <script>
+    const tests = {
+      api: [],
+      auth: [],
+      data: []
+    };
+
+    function addTest(category, name, status, message = '') {
+      tests[category].push({ name, status, message });
+      renderTests();
+    }
+
+    function renderTests() {
+      for (const [category, testList] of Object.entries(tests)) {
+        const container = document.getElementById(`${category}Tests`);
+        container.innerHTML = testList.map(test => `
+          <div class="test-result ${test.status}">
+            <span>${test.name}</span>
+            <span class="test-status">${test.status.toUpperCase()}</span>
+          </div>
+          ${test.message ? `<div style="padding: 0.5rem; font-size: 0.8rem; color: rgba(255,255,255,0.6);">→ ${test.message}</div>` : ''}
+        `).join('');
+      }
+    }
+
+    async function testLogin() {
+      addTest('auth', 'Testing login with admin credentials...', 'pending');
+      try {
+        const result = await login('admin@ginormousinvestments.com', 'Admin2026');
+        if (result.ok) {
+          addTest('auth', '✓ Admin login successful', 'pass', `User: ${result.data.user.name} (${result.data.user.role})`);
+        } else {
+          addTest('auth', '✗ Admin login failed', 'fail', result.data.error);
+        }
+      } catch (err) {
+        addTest('auth', '✗ Login request error', 'fail', err.message);
+      }
+    }
+
+    async function testContent() {
+      addTest('data', 'Testing content API...', 'pending');
+      try {
+        const result = await loadContent();
+        if (result.ok) {
+          addTest('data', '✓ Content loaded successfully', 'pass', `Hero: "${result.data.heroTitle.substring(0, 30)}..."`);
+        } else {
+          addTest('data', '✗ Content API failed', 'fail', result.data.error);
+        }
+      } catch (err) {
+        addTest('data', '✗ Content request error', 'fail', err.message);
+      }
+    }
+
+    async function testUsers() {
+      addTest('data', 'Testing users API...', 'pending');
+      try {
+        const result = await getUsers();
+        if (result.ok) {
+          addTest('data', '✓ Users fetched successfully', 'pass', `Total: ${result.data.length} users`);
+        } else {
+          addTest('data', '✗ Users API failed', 'fail', result.data.error);
+        }
+      } catch (err) {
+        addTest('data', '✗ Users request error', 'fail', err.message);
+      }
+    }
+
+    async function testProperties() {
+      addTest('data', 'Testing properties API...', 'pending');
+      try {
+        const result = await getProperties();
+        if (result.ok) {
+          addTest('data', '✓ Properties fetched successfully', 'pass', `Total: ${result.data.length} properties`);
+        } else {
+          addTest('data', '✗ Properties API failed', 'fail', result.data.error);
+        }
+      } catch (err) {
+        addTest('data', '✗ Properties request error', 'fail', err.message);
+      }
+    }
+
+    async function testEvents() {
+      addTest('data', 'Testing events API...', 'pending');
+      try {
+        const result = await getEvents();
+        if (result.ok) {
+          addTest('data', '✓ Events fetched successfully', 'pass', `Total: ${result.data.length} events`);
+        } else {
+          addTest('data', '✗ Events API failed', 'fail', result.data.error);
+        }
+      } catch (err) {
+        addTest('data', '✗ Events request error', 'fail', err.message);
+      }
+    }
+
+    async function runAllTests() {
+      tests.api = [];
+      tests.auth = [];
+      tests.data = [];
+      
+      console.log('Starting integration tests...');
+      
+      // Test API base connectivity
+      addTest('api', 'Server connectivity', 'pending');
+      try {
+        const response = await fetch('http://localhost:5000/api/dashboard/stats');
+        if (response.ok) {
+          addTest('api', 'Server connectivity', 'pass', 'http://localhost:5000 is reachable');
+        } else {
+          addTest('api', 'Server connectivity', 'fail', `HTTP ${response.status}`);
+        }
+      } catch (err) {
+        addTest('api', 'Server connectivity', 'fail', err.message);
+      }
+
+      // Run all other tests
+      await testLogin();
+      await testContent();
+      await testUsers();
+      await testProperties();
+      await testEvents();
+
+      // Additional endpoint tests
+      addTest('api', 'Dashboard stats endpoint', 'pending');
+      try {
+        const result = await getDashboardStats();
+        if (result.ok) {
+          addTest('api', 'Dashboard stats endpoint', 'pass', `Staff: ${result.data.staffCount}, Admins: ${result.data.adminCount}`);
+        } else {
+          addTest('api', 'Dashboard stats endpoint', 'fail', result.data.error);
+        }
+      } catch (err) {
+        addTest('api', 'Dashboard stats endpoint', 'fail', err.message);
+      }
+
+      addTest('api', 'Activity log endpoint', 'pending');
+      try {
+        const result = await getActivityLog(null, null, 10);
+        if (result.ok) {
+          addTest('api', 'Activity log endpoint', 'pass', `Retrieved ${result.data.length} entries`);
+        } else {
+          addTest('api', 'Activity log endpoint', 'fail', result.data.error);
+        }
+      } catch (err) {
+        addTest('api', 'Activity log endpoint', 'fail', err.message);
+      }
+
+      console.log('Integration tests completed');
+    }
+
+    // Auto-run tests on page load
+    window.addEventListener('load', () => {
+      addTest('api', 'Integration test page loaded', 'pass', 'Ready to run tests');
+    });
+  </script>
+</body>
+</html>

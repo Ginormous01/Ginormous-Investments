@@ -1,0 +1,388 @@
+{
+  "users": [
+    {
+      "email": "kayslone.dara@gmail.com",
+      "password": "Kayslone@16",
+      "name": "Kayslone",
+      "role": "staff",
+      "position": "Sales Executive",
+      "status": "active",
+      "verified": true,
+      "joinedAt": "2026-01-15"
+    },
+    {
+      "email": "admin@ginormousinvestments.com",
+      "password": "Admin2026",
+      "name": "Administrator",
+      "role": "admin",
+      "position": "Executive Admin",
+      "status": "active",
+      "verified": true,
+      "joinedAt": "2025-12-01"
+    }
+  ],
+  "content": {
+    "heroTitle": "Build wealth through ginormous investments in real estate",
+    "heroSubtitle": "Nigeria's boldest real estate development firm — unlocking property value across Abuja and Gwagwalada through land banking, strategic investment, and community-driven growth.",
+    "heroPrimaryCTA": "Browse Properties",
+    "heroSecondaryCTA": "Browse Events",
+    "heroPrimaryLink": "#shop-properties",
+    "heroSecondaryLink": "#shop-events",
+    "aboutTitle": "We are passionate about empowering individuals and businesses to take control of their finances and achieve their financial goals.",
+    "aboutDescription": "We are dedicated to revolutionizing the way individuals and businesses manage their finances. Our team is committed to providing intuitive and innovative solutions that empower our users to achieve financial success.",
+    "whatsappNumber": "+2349113054932",
+    "emailAddress": "info@ginormousinvestments.com",
+    "contactHeading": "Have Questions? Our team is ready to help.",
+    "contactSubtitle": "Contact us for more information, site visits, or payment plan details.",
+    "contactWhatsAppLabel": "Chat on WhatsApp",
+    "contactEmailLabel": "Send an Email"
+  },
+  "properties": [
+    {
+      "id": "p1",
+      "title": "Gwagwalada Island Deluxe",
+      "description": "1300 sqm within a secure estate, adjacent to main roads and future amenities",
+      "tag": "Prime Plot",
+      "price": 3500000,
+      "currency": "NGN",
+      "meta": "From ₦3.5M · Verified Properties",
+      "image": "uploads/prop_1782476315800.jpg",
+      "status": "available",
+      "prices": {
+        "plot": 3500000,
+        "acre": 8400000,
+        "hectare": 28000000
+      }
+    },
+    {
+      "id": "p2",
+      "title": "Ginormous Residence",
+      "description": "A 15-minute drive from Abuja city center with strong growth potential.",
+      "tag": "Development Land",
+      "price": 5000000,
+      "currency": "NGN",
+      "meta": "From ₦5M · Title ready",
+      "image": "images/Property Images/ginormousresidence.png",
+      "status": "available",
+      "prices": {
+        "plot": 5000000,
+        "acre": 12200000,
+        "hectare": 29500000
+      }
+    },
+    {
+      "id": "p3",
+      "title": "Ginormous Farm Estate",
+      "description": "Premium residential plots inside our newest estate, designed for quick appreciation.",
+      "tag": "Investment Estate",
+      "price": 8500000,
+      "currency": "NGN",
+      "meta": "From ₦8.5M/acre · Site inspection available",
+      "image": "images/Property Images/farmestate.png",
+      "status": "available",
+      "prices": {
+        "plot": 3400000,
+        "acre": 8500000,
+        "hectare": 20400000
+      }
+    }
+  ],
+  "orders": [
+    {
+      "id": "order_1783756323127",
+      "items": [
+        {
+          "name": "Ginormous Residence",
+          "type": "property",
+          "unit": "plot",
+          "quantity": 1,
+          "price": 5000000,
+          "subtotal": 5000000
+        }
+      ],
+      "customerName": "Daramola Okiki",
+      "customerEmail": "kayslone.dara@gmail.com",
+      "phone": "08169120790",
+      "amount": 5000000,
+      "status": "pending",
+      "createdAt": "2026-07-11T07:52:03.128Z"
+    },
+    {
+      "id": "order_1783756476235",
+      "items": [
+        {
+          "name": "Gwagwalada Island Deluxe",
+          "type": "property",
+          "unit": "acre",
+          "quantity": 1,
+          "price": 8400000,
+          "subtotal": 8400000
+        }
+      ],
+      "customerName": "Daramola Okiki",
+      "customerEmail": "kayslone.dara@gmail.com",
+      "phone": "08169120790",
+      "amount": 8400000,
+      "status": "pending",
+      "createdAt": "2026-07-11T07:54:36.235Z"
+    },
+    {
+      "id": "order_1783756521758",
+      "items": [
+        {
+          "name": "Ginormous Farm Estate",
+          "type": "property",
+          "unit": "acre",
+          "quantity": 1,
+          "price": 20400000,
+          "subtotal": 20400000
+        }
+      ],
+      "customerName": "Daramola Okiki",
+      "customerEmail": "dekayslone.dara@gmail.com",
+      "phone": "08169120790",
+      "amount": 20400000,
+      "status": "pending",
+      "createdAt": "2026-07-11T07:55:21.758Z"
+    }
+  ],
+  "payments": [],
+  "events": [
+    {
+      "id": "event_1782301737993",
+      "title": "Kayslone conference",
+      "description": "A birthday party",
+      "date": "20026-07-09",
+      "time": "12:00",
+      "location": "Abuja",
+      "image": null,
+      "createdAt": "2026-06-24T11:48:57.993Z"
+    }
+  ],
+  "activityLog": [
+    {
+      "id": "activity_1780901917126",
+      "type": "LOGIN_SUCCESS",
+      "user": "admin@ginormousinvestments.com",
+      "details": "User Administrator (admin) logged in",
+      "timestamp": "2026-06-08T06:58:37.126Z"
+    },
+    {
+      "id": "activity_1780902890106",
+      "type": "LOGIN_SUCCESS",
+      "user": "admin@ginormousinvestments.com",
+      "details": "User Administrator (admin) logged in",
+      "timestamp": "2026-06-08T07:14:50.107Z"
+    },
+    {
+      "id": "activity_1780903307091",
+      "type": "EVENT_CREATED",
+      "user": "system",
+      "details": "Event created: Property Showcase Event on 2026-06-15",
+      "timestamp": "2026-06-08T07:21:47.091Z"
+    },
+    {
+      "id": "activity_1780903386549",
+      "type": "USER_SUSPENDED",
+      "user": "system",
+      "details": "Tunde (kayslone.dara@gmail.com) suspended",
+      "timestamp": "2026-06-08T07:23:06.549Z"
+    },
+    {
+      "id": "activity_1780903396491",
+      "type": "USER_UNSUSPENDED",
+      "user": "system",
+      "details": "Tunde (kayslone.dara@gmail.com) unsuspended",
+      "timestamp": "2026-06-08T07:23:16.491Z"
+    },
+    {
+      "id": "activity_1780903425457",
+      "type": "LOGIN_SUCCESS",
+      "user": "admin@ginormousinvestments.com",
+      "details": "User Administrator (admin) logged in",
+      "timestamp": "2026-06-08T07:23:45.457Z"
+    },
+    {
+      "id": "activity_1780903559033",
+      "type": "USER_UPDATED",
+      "user": "system",
+      "details": "Kayslone (kayslone.dara@gmail.com) updated",
+      "timestamp": "2026-06-08T07:25:59.033Z"
+    },
+    {
+      "id": "activity_1780903605494",
+      "type": "LOGIN_SUCCESS",
+      "user": "kayslone.dara@gmail.com",
+      "details": "User Kayslone (staff) logged in",
+      "timestamp": "2026-06-08T07:26:45.494Z"
+    },
+    {
+      "id": "activity_1781051882834",
+      "type": "LOGIN_SUCCESS",
+      "user": "admin@ginormousinvestments.com",
+      "details": "User Administrator (admin) logged in",
+      "timestamp": "2026-06-10T00:38:02.834Z"
+    },
+    {
+      "id": "activity_1782264831735",
+      "type": "LOGIN_SUCCESS",
+      "user": "admin@ginormousinvestments.com",
+      "details": "User Administrator (admin) logged in",
+      "timestamp": "2026-06-24T01:33:51.736Z"
+    },
+    {
+      "id": "activity_1782264868147",
+      "type": "EVENT_CREATED",
+      "user": "system",
+      "details": "Event created: ll on 2026-07-03",
+      "timestamp": "2026-06-24T01:34:28.147Z"
+    },
+    {
+      "id": "activity_1782297935534",
+      "type": "LOGIN_SUCCESS",
+      "user": "admin@ginormousinvestments.com",
+      "details": "User Administrator (admin) logged in",
+      "timestamp": "2026-06-24T10:45:35.534Z"
+    },
+    {
+      "id": "activity_1782301017974",
+      "type": "LOGIN_SUCCESS",
+      "user": "admin@ginormousinvestments.com",
+      "details": "User Administrator (admin) logged in",
+      "timestamp": "2026-06-24T11:36:57.974Z"
+    },
+    {
+      "id": "activity_1782301737994",
+      "type": "EVENT_CREATED",
+      "user": "system",
+      "details": "Event created: Kayslone conference on 20026-07-09",
+      "timestamp": "2026-06-24T11:48:57.994Z"
+    },
+    {
+      "id": "activity_1782302100232",
+      "type": "PROPERTY_UPDATED",
+      "user": "system",
+      "details": "Property updated: Gwagwalada Island Deluxe",
+      "timestamp": "2026-06-24T11:55:00.232Z"
+    },
+    {
+      "id": "activity_1782303170467",
+      "type": "PROPERTY_UPDATED",
+      "user": "system",
+      "details": "Property updated: Gwagwalada Island Deluxe",
+      "timestamp": "2026-06-24T12:12:50.467Z"
+    },
+    {
+      "id": "activity_1782303206039",
+      "type": "PROPERTY_UPDATED",
+      "user": "system",
+      "details": "Property updated: Gwagwalada Island Deluxe",
+      "timestamp": "2026-06-24T12:13:26.039Z"
+    },
+    {
+      "id": "activity_1782303428746",
+      "type": "PROPERTY_ADDED",
+      "user": "system",
+      "details": "Property added: Gwagwalada Island Deluxe 2",
+      "timestamp": "2026-06-24T12:17:08.746Z"
+    },
+    {
+      "id": "activity_1782304333146",
+      "type": "PROPERTY_UPDATED",
+      "user": "system",
+      "details": "Property updated: Ginormous Residence",
+      "timestamp": "2026-06-24T12:32:13.146Z"
+    },
+    {
+      "id": "activity_1782304351740",
+      "type": "PROPERTY_UPDATED",
+      "user": "system",
+      "details": "Property updated: Ginormous Residence",
+      "timestamp": "2026-06-24T12:32:31.740Z"
+    },
+    {
+      "id": "activity_1782304924964",
+      "type": "LOGIN_SUCCESS",
+      "user": "kayslone.dara@gmail.com",
+      "details": "User Kayslone (staff) logged in",
+      "timestamp": "2026-06-24T12:42:04.964Z"
+    },
+    {
+      "id": "activity_1782334323427",
+      "type": "PROPERTY_UPDATED",
+      "user": "system",
+      "details": "Property updated: Gwagwalada Island Deluxe",
+      "timestamp": "2026-06-24T20:52:03.427Z"
+    },
+    {
+      "id": "activity_1782334358412",
+      "type": "PROPERTY_UPDATED",
+      "user": "system",
+      "details": "Property updated: Gwagwalada Island Deluxe",
+      "timestamp": "2026-06-24T20:52:38.412Z"
+    },
+    {
+      "id": "activity_1782476160004",
+      "type": "LOGIN_SUCCESS",
+      "user": "admin@ginormousinvestments.com",
+      "details": "User Administrator (admin) logged in",
+      "timestamp": "2026-06-26T12:16:00.006Z"
+    },
+    {
+      "id": "activity_1782476315902",
+      "type": "PROPERTY_UPDATED",
+      "user": "system",
+      "details": "Property updated: Gwagwalada Island Deluxe",
+      "timestamp": "2026-06-26T12:18:35.902Z"
+    },
+    {
+      "id": "activity_1782477663893",
+      "type": "LOGIN_SUCCESS",
+      "user": "admin@ginormousinvestments.com",
+      "details": "User Administrator (admin) logged in",
+      "timestamp": "2026-06-26T12:41:03.893Z"
+    },
+    {
+      "id": "activity_1782477663922",
+      "type": "LOGIN_FAILED",
+      "user": "admin@ginormousinvestments.com",
+      "details": "Failed login attempt with invalid credentials",
+      "timestamp": "2026-06-26T12:41:03.922Z"
+    },
+    {
+      "id": "activity_1782477672434",
+      "type": "USER_REGISTERED",
+      "user": "testuser@test.com",
+      "details": "New user registered: Test User (testuser@test.com) as staff",
+      "timestamp": "2026-06-26T12:41:12.434Z"
+    },
+    {
+      "id": "activity_1782477672463",
+      "type": "LOGIN_FAILED",
+      "user": "testuser@test.com",
+      "details": "Login attempt by unverified user",
+      "timestamp": "2026-06-26T12:41:12.463Z"
+    },
+    {
+      "id": "activity_1782478311599",
+      "type": "LOGIN_SUCCESS",
+      "user": "admin@ginormousinvestments.com",
+      "details": "User Administrator (admin) logged in",
+      "timestamp": "2026-06-26T12:51:51.599Z"
+    }
+  ],
+  "resetTokens": [
+    {
+      "email": "admin@ginormousinvestments.com",
+      "token": "9173eb668cad00a56f955290bc9aa474f035d4d1134e6dfd09b1761d8c091156",
+      "expiresAt": 1782481263935
+    }
+  ],
+  "verificationTokens": [
+    {
+      "email": "testuser@test.com",
+      "token": "a7f93fa64d5011f5bc49509c56b9e2fe8380149837f02bcbe523a30c36a273f5",
+      "expiresAt": 1782564069937
+    }
+  ]
+}

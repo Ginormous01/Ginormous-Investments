@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Staff Dashboard — Ginormous Investments</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="sidebar-page">
+  <main class="dashboard-wrap">
+    <aside class="dashboard-sidebar">
+      <div class="profile-card">
+        <div class="profile-avatar" id="profileAvatar"><span id="profileInitials"></span></div>
+        <div class="profile-info">
+          <p class="profile-position" id="profilePosition"></p>
+          <h2 id="profileName"></h2>
+          <p class="profile-email" id="profileEmail"></p>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <ul>
+          <li><a href="#profileSection" class="active">My Profile</a></li>
+          <li><a href="#dashboardSection">Dashboard</a></li>
+          <li><a href="#tasksSection">Tasks</a></li>
+          <li><a href="#scheduleSection">Schedules</a></li>
+          <li><a href="#requestSection">Special Request</a></li>
+          <li><a href="#settingsSection">Settings</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <section class="dashboard-main">
+      <header class="dashboard-header">
+        <div>
+          <p class="dashboard-role" id="dashboardRole"></p>
+          <h1 class="dashboard-title" id="dashboardWelcome"></h1>
+          <p class="dashboard-intro">This page is your private work hub. Track your tasks, appointments, notifications, and performance insights here.</p>
+        </div>
+        <button id="logoutBtn" class="btn-ghost">Log Out</button>
+      </header>
+
+      <section class="dashboard-panel" id="profileSection">
+        <div class="profile-summary">
+          <div>
+            <p class="panel-label">Profile Summary</p>
+            <h2 id="summaryName"></h2>
+            <p id="summaryRole" class="subtle-text"></p>
+          </div>
+          <div class="summary-meta">
+            <span><strong>Team:</strong> Sales & Operations</span>
+            <span><strong>Member since:</strong> Jan 2025</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="stat-grid dashboard-panel" id="dashboardSection">
+        <article class="stat-card">
+          <p class="stat-label">Tasks Completed</p>
+          <h3 id="statTasks">0</h3>
+        </article>
+        <article class="stat-card">
+          <p class="stat-label">Appointments Today</p>
+          <h3 id="statAppointments">0</h3>
+        </article>
+        <article class="stat-card">
+          <p class="stat-label">Response Rate</p>
+          <h3 id="statResponse">0%</h3>
+        </article>
+        <article class="stat-card">
+          <p class="stat-label">Requests Pending</p>
+          <h3 id="statRequests">0</h3>
+        </article>
+      </section>
+
+      <div class="dashboard-grid">
+        <article class="dashboard-card" id="tasksSection">
+          <h2>Today's Tasks</h2>
+          <ul id="taskList"></ul>
+        </article>
+
+        <article class="dashboard-card" id="scheduleSection">
+          <h2>Appointments</h2>
+          <ul id="scheduleList"></ul>
+        </article>
+
+        <article class="dashboard-card" id="notificationsSection">
+          <h2>Notifications</h2>
+          <ul id="notificationList"></ul>
+        </article>
+
+        <article class="dashboard-card" id="performanceSection">
+          <h2>Mini Performance Insight</h2>
+          <div class="performance-item">
+            <span>Tasks on track</span>
+            <strong id="perfTasks">0%</strong>
+          </div>
+          <div class="performance-item">
+            <span>Client follow-ups</span>
+            <strong id="perfFollowups">0%</strong>
+          </div>
+          <div class="performance-item">
+            <span>Goal completion</span>
+            <strong id="perfGoal">0%</strong>
+          </div>
+        </article>
+
+        <article class="dashboard-card request-shortcut" id="requestSection">
+          <h2>Special Request</h2>
+          <p>Need support or extra resources? Create a request shortcut to notify your manager immediately.</p>
+          <button class="btn-primary" onclick="alert('Special request flow coming soon.')">Create Request</button>
+        </article>
+
+        <article class="dashboard-card" id="settingsSection">
+          <h2>Settings</h2>
+          <p>Update your profile, notification preferences, or request help from the admin team.</p>
+          <button class="btn-ghost" onclick="alert('Settings page coming soon.')">Open Settings</button>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const stored = sessionStorage.getItem('staffDashboardUser');
+    if (!stored) {
+      window.location.href = 'staff-login.html';
+    }
+
+    const user = JSON.parse(stored);
+    
+    // Redirect admins to admin dashboard
+    if (user.role === 'admin') {
+      window.location.href = 'admin-dashboard.html';
+    }
+
+    const profileName = document.getElementById('profileName');
+    const profilePosition = document.getElementById('profilePosition');
+    const profileEmail = document.getElementById('profileEmail');
+    const profileInitials = document.getElementById('profileInitials');
+    const summaryName = document.getElementById('summaryName');
+    const summaryRole = document.getElementById('summaryRole');
+    const dashboardWelcome = document.getElementById('dashboardWelcome');
+    const dashboardRole = document.getElementById('dashboardRole');
+
+    profileName.textContent = user.name;
+    profilePosition.textContent = user.position || (user.role === 'admin' ? 'Administrator' : 'Staff');
+    profileEmail.textContent = user.email;
+    profileInitials.textContent = user.name.split(' ').map(segment => segment[0]).join('').slice(0, 2).toUpperCase();
+    summaryName.textContent = user.name;
+    summaryRole.textContent = profilePosition.textContent;
+    dashboardWelcome.textContent = `Good day, ${user.name}`;
+    dashboardRole.textContent = user.role === 'admin' ? 'Administrator Dashboard' : 'Staff Dashboard';
+
+    const userData = {
+      Tunde: {
+        tasks: ['Review new property inquiries', 'Confirm appointment for site visit', 'Update client payment status'],
+        appointments: ['10:00 AM — Client briefing', '1:30 PM — Estate walk-through', '4:00 PM — Call with legal team'],
+        notifications: ['New lead assigned', 'Payment confirmation received', 'Document upload required'],
+        performance: { tasks: 84, followups: 92, goal: 78 },
+        requestsPending: 2
+      },
+      Administrator: {
+        tasks: ['Review staff performance overview', 'Approve pending listings', 'Manage system access requests'],
+        appointments: ['11:00 AM — Leadership meeting', '2:00 PM — Finance check-in', '5:00 PM — Report review'],
+        notifications: ['New admin access request', 'System maintenance scheduled', 'Policy update released'],
+        performance: { tasks: 92, followups: 94, goal: 88 },
+        requestsPending: 0
+      }
+    };
+
+    const activeData = userData[user.name] || userData.Administrator;
+    const taskList = document.getElementById('taskList');
+    const scheduleList = document.getElementById('scheduleList');
+    const notificationList = document.getElementById('notificationList');
+
+    taskList.innerHTML = activeData.tasks.map(task => `<li>${task}</li>`).join('');
+    scheduleList.innerHTML = activeData.appointments.map(item => `<li>${item}</li>`).join('');
+    notificationList.innerHTML = activeData.notifications.map(note => `<li>${note}</li>`).join('');
+
+    document.getElementById('statTasks').textContent = activeData.tasks.length;
+    document.getElementById('statAppointments').textContent = activeData.appointments.length;
+    document.getElementById('statResponse').textContent = `${activeData.performance.followups}%`;
+    document.getElementById('statRequests').textContent = activeData.requestsPending;
+    document.getElementById('perfTasks').textContent = `${activeData.performance.tasks}%`;
+    document.getElementById('perfFollowups').textContent = `${activeData.performance.followups}%`;
+    document.getElementById('perfGoal').textContent = `${activeData.performance.goal}%`;
+
+    document.querySelectorAll('.sidebar-nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.querySelectorAll('.sidebar-nav a').forEach(item => item.classList.remove('active'));
+        link.classList.add('active');
+      });
+    });
+
+    document.getElementById('logoutBtn').addEventListener('click', function() {
+      sessionStorage.removeItem('staffDashboardUser');
+      window.location.href = 'staff-login.html';
+    });
+  </script>
+</body>
+</html>
