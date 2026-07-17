@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#0a0a0a"/>
+  <rect x="0" y="0" width="1200" height="630" fill="url(#gradient)" opacity="0.3"/>
+  <defs>
+    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FBBC1F;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#000000;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <text x="600" y="280" font-family="Arial, sans-serif" font-size="72" font-weight="bold" fill="#FBBC1F" text-anchor="middle">GINORMOUS</text>
+  <text x="600" y="360" font-family="Arial, sans-serif" font-size="48" fill="#ffffff" text-anchor="middle">INVESTMENTS</text>
+  <text x="600" y="450" font-family="Arial, sans-serif" font-size="32" fill="#FBBC1F" text-anchor="middle">Abuja Real Estate</text>
+  <text x="600" y="520" font-family="Arial, sans-serif" font-size="24" fill="#888888" text-anchor="middle">Land Banking · Property Development · Investment Advisory</text>
+</svg>
